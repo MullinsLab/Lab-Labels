@@ -15,11 +15,11 @@ sub dispatch_request {
     (
         'POST + /stickers' => sub {
             my $self = shift;
-            my $req = Plack::Request->new($_[PSGI_ENV]);
+            my $req  = Plack::Request->new($_[PSGI_ENV]);
+            my $ct   = $req->headers->content_type;
 
-            if ($req->content_type !~ /^application\/json/) {
-                return [ 415, ['Content-type', 'application/json'], ['{"error":"Client error"}']];
-            }
+            return [ 415, ['Content-type', 'application/json'], ['{"error":"Client error"}']]
+                unless $ct and $ct eq 'application/json';
 
             my $body = decode_json($req->content);
             my $labels = Labels->new(
