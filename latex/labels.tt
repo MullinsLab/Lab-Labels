@@ -1,0 +1,10 @@
+\newcommand{\sticker}[3][1]{%
+  \numberoflabels=#1
+  \addresslabel[\tiny\color{#3}]{\centering #2}
+}
+
+\begin{document}
+[%- FOR label IN labels %]
+    \sticker[[% label.copies | escape_text %]]{[% label.text | escape_text | replace('[\r\n]', ' \\\\ ') %]}{[% label.color || 'black' | escape_text %]}
+[%- END -%]
+\end{document}

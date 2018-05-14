@@ -1,0 +1,36 @@
+% Diversified Biotech SPOT-1000
+% Note that the labels layed out with the company's specs are 0.38" (9.7mm)
+% squares minus 0.02" (0.5mm) of left/right padding, which obviously do not
+% entirely fit into the 3/8" (9.5mm) diameter circles.  The maximum square
+% which fully fits inside the circular stickers is 0.26" (6.7mm) wide.
+%
+% These labels are 7x7mm square to better fit into the 9.5mm diameter circles.
+
+\documentclass[letterpaper]{article}
+
+[% INCLUDE style.tt %]
+
+\usepackage[newdimens]{labels}
+\LabelCols=12               % Number of columns of labels per page
+\LabelRows=16               % Number of rows of labels per page
+
+% Base margins as measured
+% + 1.6mm on right to account for 1/16" narrower stock than letter
+% + 1.4mm to inset into sticker (9.5mm diameter - 6.7mm max inner square = 2.8mm, divided by two for each side's contribution)
+\LeftPageMargin=15.4mm      % These four parameters give the
+\RightPageMargin=17.5mm     % page gutter sizes. The outer edges of
+\TopPageMargin=16.4mm       % the outer labels are the specified
+\BottomPageMargin=16.9mm    % distances from the edge of the paper.
+
+% Base gaps measured (6.5mm) + 1.4mm inset from each side (2.8mm total)
+\InterLabelColumn=9.3mm     % Gap between columns of labels
+\InterLabelRow=9.3mm        % Gap between rows of labels
+
+\LeftLabelBorder=0mm        % These four parameters give the extra
+\RightLabelBorder=0mm       % space used around the text on each
+\TopLabelBorder=0mm         % actual label.
+\BottomLabelBorder=0mm      %
+
+\LabelInfotrue
+
+[% INCLUDE labels.tt %]

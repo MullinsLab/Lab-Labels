@@ -1,0 +1,9 @@
+\usepackage{fontspec}
+\setmainfont{Helvetica Neue}
+
+% These colors are from MS Word's default theme accent colors, as originally
+% used by Breana.
+\usepackage{xcolor}
+\definecolor{red}{HTML}{C0504D}
+\definecolor{blue}{HTML}{4F81BD}
+\definecolor{purple}{HTML}{8064A2}
