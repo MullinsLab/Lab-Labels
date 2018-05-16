@@ -31,7 +31,7 @@ sub dispatch_request {
         },
 
         '/...' => sub {
-            state $static = Plack::App::File->new(root => path(__FILE__)->parent(2)->child("root"))->to_app;
+            state $static = Plack::App::File->new(root => path(__FILE__)->parent(1)->child("root"))->to_app;
             $static;
         }
     )
