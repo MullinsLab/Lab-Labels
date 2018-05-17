@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style type="text/css">
+#main {
+    display: flex;
+    flex-flow: column;
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+#main select {
+    width: 8em;
+}
+
+#main input[type=number] {
+    width: 8em;
+}
+
+</style>
+</head>
+<body>
+    <div id="main">
+        <h1>Let's make some labels!</h1>
+        <form action="/labels/my-nice-labels.pdf" method="POST">
+            <div class="form-group">
+                <label for="sku">Label type</label>
+                <select name="sku" class="form-control" required>
+                    <option>LCRY-1700</option>
+                    <option>SPOT-1000</option>
+                    <option>SPOT-2000</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="copies">Copies per label</label>
+                <input type="number" min="1" value="1" required name="copies" class="form-control"></input>
+            </div>
+            <div class="form-group">
+                <label for="labels">Label text</label>
+                <textarea name="labels" class="form-control" required></textarea>
+                <p><small>One line per label. Use <code>&nbsp;\&nbsp;</code> (backslash surrounded by spaces) to break lines inside a label.</small></p>
+            </div>
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+</body>

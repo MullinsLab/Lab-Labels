@@ -13,6 +13,20 @@ use Labels;
 
 sub dispatch_request {
     (
+        'POST + /labels/* + %sku=&labels=&copies=' => sub {
+            my ($self, undef, $sku, $text, $copies) = @_;
+            my @lines = split /\r?\n/, $text;
+            my @labels = map {
+                { text => ($_ =~ s/ \\ /\n/gr), copies => $copies };
+            } @lines;
+
+            my $labels = Labels->new(
+                type   => $sku,
+                labels => \@labels,
+            );
+            return [ 200, ['Content-type', 'application/pdf'], [ $labels->as_pdf ] ];
+        },
+
         'POST + /stickers' => sub {
             my $self = shift;
             my $req  = Plack::Request->new($_[PSGI_ENV]);
@@ -29,6 +43,11 @@ sub dispatch_request {
 
             return [ 200, ['Content-type', 'application/pdf'], [ $labels->as_pdf ] ];
         },
+
+        '/' => sub {
+            return [301, ['Location', '/index.html'], []]
+        },
+
 
         '/...' => sub {
             state $static = Plack::App::File->new(root => path(__FILE__)->parent(1)->child("root"))->to_app;
