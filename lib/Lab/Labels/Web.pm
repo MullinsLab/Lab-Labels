@@ -1,4 +1,4 @@
-package Web;
+package Lab::Labels::Web;
 
 use 5.020;
 use strict;
@@ -9,7 +9,7 @@ use JSON::MaybeXS;
 use Path::Tiny;
 use Plack::Request;
 use Plack::App::File;
-use Labels;
+use Lab::Labels;
 
 sub dispatch_request {
     (
@@ -20,7 +20,7 @@ sub dispatch_request {
                 { text => ($_ =~ s/ \\ /\n/gr), copies => $copies };
             } @lines;
 
-            my $labels = Labels->new(
+            my $labels = Lab::Labels->new(
                 type   => $sku,
                 labels => \@labels,
             );
@@ -36,7 +36,7 @@ sub dispatch_request {
                 unless $ct and $ct eq 'application/json';
 
             my $body = decode_json($req->content);
-            my $labels = Labels->new(
+            my $labels = Lab::Labels->new(
                 type   => $body->{type},
                 labels => $body->{labels},
             );
@@ -50,10 +50,10 @@ sub dispatch_request {
 
 
         '/...' => sub {
-            state $static = Plack::App::File->new(root => path(__FILE__)->parent(1)->child("root"))->to_app;
+            state $static = Plack::App::File->new(root => path(__FILE__)->parent(4)->child("root"))->to_app;
             $static;
         }
     )
 }
 
-Web->run_if_script;
+1;

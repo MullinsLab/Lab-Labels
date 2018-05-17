@@ -1,4 +1,4 @@
-package LaTeX;
+package Lab::Labels::LaTeX;
 use 5.020;
 use strict;
 use base 'Template::Latex';
@@ -7,7 +7,7 @@ use Path::Tiny;
 use namespace::autoclean;
 
 my $DEFAULTS = {
-    INCLUDE_PATH        => [ path(__FILE__)->parent(2)->child("latex") ],
+    INCLUDE_PATH        => [ path(__FILE__)->parent(4)->child("latex") ],
     LATEX_FORMAT        => 'pdf',
     TEMPLATE_EXTENSION  => '.tex',
     WRAPPER             => 'wrapper.tt',

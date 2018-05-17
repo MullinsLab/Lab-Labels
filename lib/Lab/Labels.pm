@@ -1,13 +1,13 @@
 use 5.020;
 use utf8;
 
-package Labels;
+package Lab::Labels;
 use Moo;
 use Types::Standard qw< :types slurpy >;
 use Types::Common::Numeric qw< :types >;
 use Types::Common::String qw< NonEmptyStr >;
 use Path::Tiny;
-use LaTeX;
+use Lab::Labels::LaTeX;
 use namespace::autoclean;
 
 has type => (
@@ -45,7 +45,7 @@ sub as_pdf {
         labels => $self->labels,
     };
 
-    state $latex = LaTeX->new;
+    state $latex = Lab::Labels::LaTeX->new;
 
     my $pdf;
     $latex->process($self->template->stringify, $context, \$pdf)
