@@ -1,5 +1,5 @@
-deps: cpanm cpanfile
-	perl ./$< -L local --quiet --notest --installdeps .
+deps: cpanm cpanfile bin/perl
+	./bin/perl ./$< -L local --quiet --notest --installdeps .
 
 cpanm:
 	curl -fsSL https://cpanmin.us > $@
