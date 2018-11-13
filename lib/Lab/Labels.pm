@@ -29,6 +29,13 @@ has labels => (
     required => 1,
 );
 
+has gridlines => (
+    is      => 'ro',
+    isa     => Bool,
+    default => 0,
+    coerce  => 1,
+);
+
 has template => (
     is  => 'lazy',
     isa => InstanceOf["Path::Tiny"],
@@ -44,6 +51,7 @@ sub as_pdf {
     my $self    = shift;
     my $context = {
         labels => $self->labels,
+        gridlines => $self->gridlines,
     };
 
     state $latex = Lab::Labels::LaTeX->new;

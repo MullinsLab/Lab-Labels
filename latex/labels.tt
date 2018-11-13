@@ -1,3 +1,7 @@
+[% IF gridlines %]
+\LabelGridtrue
+[% END %]
+
 \newcommand{\sticker}[3][1]{%
   \numberoflabels=#1
   \addresslabel[\tiny\color{#3}]{\centering #2}
