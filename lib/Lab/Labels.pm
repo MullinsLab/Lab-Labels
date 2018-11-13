@@ -20,8 +20,9 @@ has labels => (
     is       => 'ro',
     isa      => ArrayRef[
         Dict[
-            text   => Str,
-            copies => PositiveInt,
+            text    => Str,
+            copies  => PositiveInt,
+            barcode => Optional[Str],
             slurpy HashRef
         ]
     ],

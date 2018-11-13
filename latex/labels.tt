@@ -3,8 +3,17 @@
   \addresslabel[\tiny\color{#3}]{\centering #2}
 }
 
+[% BLOCK label_contents ~%]
+  [%~ IF label.barcode ~%]
+    \leavevmode
+    \code{[% label.barcode | escape_text | replace(' ', '\ ') %]}\\
+    \tt [%%]
+  [%~ END ~%]
+  [%~ label.text | escape_text | replace('[\r\n]', ' \\\\ ') ~%]
+[%~ END %]
+
 \begin{document}
 [%- FOR label IN labels %]
-    \sticker[[% label.copies | escape_text %]]{[% label.text | escape_text | replace('[\r\n]', ' \\\\ ') %]}{[% label.color || 'black' | escape_text %]}
+    \sticker[[% label.copies | escape_text %]]{[% PROCESS label_contents %]}{[% label.color || 'black' | escape_text %]}
 [%- END -%]
 \end{document}

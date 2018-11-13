@@ -13,12 +13,14 @@ use Lab::Labels;
 
 sub dispatch_request {
     (
-        'POST + /labels/* + %sku=&labels=&copies=' => sub {
-            my ($self, undef, $sku, $text, $copies) = @_;
+        'POST + /labels/* + %sku=&labels=&copies=&as_barcodes~' => sub {
+            my ($self, undef, $sku, $text, $copies, $as_barcodes) = @_;
             my @lines = split /\r?\n/, $text;
-            my @labels = map {
-                { text => ($_ =~ s/ \\ /\n/gr), copies => $copies };
-            } @lines;
+            my @labels =
+                map { $as_barcodes ? { %$_, barcode => $_->{text} } : $_ }
+                map { +{ text => $_, copies => $copies } }
+                map { s/ \\ /\n/gr }
+                    @lines;
 
             my $labels = Lab::Labels->new(
                 type   => $sku,
