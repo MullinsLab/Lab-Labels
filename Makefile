@@ -5,3 +5,6 @@ bin/cpanm:
 	mkdir -p $(dir $@)
 	curl -fsSL https://cpanmin.us > $@
 	chmod +x $@
+
+docker-image:
+	docker build -t lab-labels .
