@@ -1,6 +1,7 @@
 % Macro for conversion of string to barcodes by Code 128 standard
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % March 1996                                 (C) Petr Ol\v{s}\'ak
+% Modified slightly by Thomas Sibley in Nov 2018.
 
 % For user information see the file test128.tex
 
@@ -10,18 +11,18 @@
 \wlog{**** Macro for barcodes in "Code 128" by (C) Petr Olsak used ****}
 
 % Declarations:
-\newdimen\X            % the module size X,
+\newdimen\barcodeX            % the module size X,
 \newdimen\bcorr        % the bar correction (see bellow).
-\newdimen\workdimen \newdimen\barheight   % internal variables
+\newdimen\workdimen \newdimen\barcodeHeight   % internal variables
 \newtoks\inputtext \newtoks\icode
 \newcount\tempnum \newcount\chnum \newcount\chtotal
 \newif\ifnext \newif\ifchar
 \def\empty{} \def\End{@@end}
 
 % Implicit values:
-\X=.33mm         % The X module width.
+\barcodeX=.33mm         % The X module width.
 \bcorr=.020mm    % Bar reduction.
-\barheight=1.5cm % The code height.
+\barcodeHeight=1.5cm % The code height.
 
 % First we declare some tables.
 % "\definetable<lab><num> string \relax": Each token from "string" gets a value
@@ -230,12 +231,12 @@
 % \internalcode representation. Each width of \vrule is corrected by \bcorr
 % and opposite for \kern.
 \def\makebars#1#2{\if0#2\let\next=\endcode\fi
-  \workdimen=#1\X \advance\workdimen by-\bcorr \vrule width\workdimen
-  \workdimen=#2\X \advance\workdimen by \bcorr \kern\workdimen
+  \workdimen=#1\barcodeX \advance\workdimen by-\bcorr \vrule width\workdimen
+  \workdimen=#2\barcodeX \advance\workdimen by \bcorr \kern\workdimen
   \next}
 
 % The begin and end of completed \hbox:
-\def\begcode{\hbox\bgroup\vrule height\barheight width0pt}
+\def\begcode{\hbox\bgroup\vrule height\barcodeHeight width0pt}
 \def\endcode{\egroup}
 
 % User can use \codetext or \codeothertext instead \code:
@@ -251,7 +252,7 @@ The characters from input string are converted from left to right
 to so called "output characters" by table 1 (see below). Each output
 character has three bars and spaces. The width of bars and the dimensions
 of spaces between bars are significant. This values are expresed by
-multiples of basic dimension: so called X module size (see \X in macro).
+multiples of basic dimension: so called X module size (see \barcodeX in macro).
 The multiples varies from 1 to 4. We are using the six digits expression of
 output character. It expressed dimensions of bar, space, bar, space, bar,
 space. For example 122412 means one output character drawn as: 1X bar, 2X
