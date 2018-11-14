@@ -1,3 +1,4 @@
-local/
-cpanm
-.texpath
+/local/
+/bin/cpanm
+/.texpath
+/bin/perl
