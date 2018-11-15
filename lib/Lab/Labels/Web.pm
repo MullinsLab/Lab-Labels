@@ -49,7 +49,7 @@ sub dispatch_request {
         },
 
         '/' => sub {
-            return [301, ['Location', 'index.html'], []]
+            redispatch_to '/index.html';
         },
 
 
