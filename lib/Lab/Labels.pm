@@ -20,12 +20,20 @@ has labels => (
     is       => 'ro',
     isa      => ArrayRef[
         Dict[
-            text   => Str,
-            copies => PositiveInt,
+            text    => Str,
+            copies  => PositiveInt,
+            barcode => Optional[Str],
             slurpy HashRef
         ]
     ],
     required => 1,
+);
+
+has gridlines => (
+    is      => 'ro',
+    isa     => Bool,
+    default => 0,
+    coerce  => 1,
 );
 
 has template => (
@@ -43,6 +51,7 @@ sub as_pdf {
     my $self    = shift;
     my $context = {
         labels => $self->labels,
+        gridlines => $self->gridlines,
     };
 
     state $latex = Lab::Labels::LaTeX->new;

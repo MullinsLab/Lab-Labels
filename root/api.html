@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<title>Lab Labels &gt; API</title>
+<style type="text/css">
+#main {
+    display: flex;
+    flex-flow: column;
+    max-width: 780px;
+    margin: 0 auto;
+}
+</style>
+</head>
+<body>
+    <div id="main">
+        <h1><a href="./">Let’s make some labels</a>… with an API!</h1>
+        <p>
+          A web API exists if you want to make labels programmatically.  The
+          sole endpoint is <code>/stickers</code> which accepts
+          <code>POST</code> requests containing an
+          <code>application/json</code> body like:
+        </p>
+<pre>{
+  "type": "LCRY-1700",
+  "gridlines": false,
+  "labels": [
+    { "text": "first label text", "copies": 1 },
+    { "text": "two of these, please", "copies": 2 },
+    { "barcode": "123456", "text": "Sample #123456", "copies": 1 }
+  ]
+}</pre>
+        <p>
+          The label <code>type</code> is required; values match the dropdown in
+          the web form.  The <code>gridlines</code> field is optional.  For
+          each label object, the <code>text</code> and <code>copies</code>
+          fields are required.  The <code>barcode</code> field is optional.
+        </p>
+        <p>
+          A successful response contains an <code>application/pdf</code> body.
+        </p>
+        <h3>curl example</h3>
+<pre>curl -fsS http://localhost:5000/stickers \
+  --header 'Content-type: application/json' \
+  --data '{
+    "type": "LCRY-1700",
+    "gridlines": false,
+    "labels": [
+      { "text": "first label text", "copies": 1 },
+      { "text": "two of these, please", "copies": 2 },
+      { "barcode": "123456", "text": "Sample #123456", "copies": 1 }
+    ]
+  }' \
+  --output labels.pdf
+</pre>
+    </div>
+</body>

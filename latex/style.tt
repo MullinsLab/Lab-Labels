@@ -1,8 +1,12 @@
+% Fonts
 \usepackage{fontspec}
 \setmainfont{DroidSans}[
   Extension   = .ttf,
   UprightFont = *,
   BoldFont    = *-Bold ]
+\setmonofont{DroidSansMono}[
+  Extension   = .ttf,
+  UprightFont = * ]
 
 % These colors are from MS Word's default theme accent colors, as originally
 % used by Breana.
@@ -10,3 +14,9 @@
 \definecolor{red}{HTML}{C0504D}
 \definecolor{blue}{HTML}{4F81BD}
 \definecolor{purple}{HTML}{8064A2}
+
+% Barcode dimensions.  Meant to be a reasonable default overridden as necessary
+% by each label spec sheet.
+\input{code128}
+\barcodeX=0.2mm
+\barcodeHeight=0.5cm
