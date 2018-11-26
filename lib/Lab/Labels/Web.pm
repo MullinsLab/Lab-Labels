@@ -25,7 +25,7 @@ sub dispatch_request {
             my $labels = Lab::Labels->new(
                 type   => $sku,
                 labels => \@labels,
-                gridlines => $gridlines,
+                gridlines => !!$gridlines,
             );
             return [ 200, ['Content-type', 'application/pdf'], [ $labels->as_pdf ] ];
         },
