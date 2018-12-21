@@ -26,11 +26,12 @@
         <form action="labels/my-nice-labels.pdf" method="POST">
             <div class="form-group">
                 <label for="sku">Label type</label>
-                <select name="sku" class="form-control" required>
+                <select id="sku" name="sku" class="form-control" required>
                     <option>LCRY-1700</option>
                     <option>LCRY-2380</option>
                     <option>SPOT-1000</option>
                     <option>SPOT-2000</option>
+                    <option value="DTCR-1000">DTCR-1000 (for label printer)</option>
                 </select>
             </div>
             <div class="form-group">
@@ -60,4 +61,19 @@
           labels programmatically.
         </p>
     </div>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            var checkboxes = document.querySelectorAll("input[type=checkbox]");
+            document.querySelector('#sku').addEventListener('change', (e) => {
+                [].forEach.call(checkboxes, (input) => {
+                    if (e.target.value == "DTCR-1000") {
+                        input.checked = false;
+                        input.disabled = true;
+                    } else {
+                        input.disabled = false;
+                    }
+                });
+            });
+        });
+    </script>
 </body>

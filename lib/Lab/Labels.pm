@@ -8,6 +8,7 @@ use Types::Common::Numeric qw< :types >;
 use Types::Common::String qw< NonEmptyStr >;
 use Path::Tiny;
 use Lab::Labels::LaTeX;
+use Lab::Labels::XeTeX;
 use namespace::autoclean;
 
 has type => (
@@ -47,6 +48,19 @@ sub _build_template {
     return path("$type.tex");
 }
 
+has engine => (
+    is => 'lazy',
+    isa => InstanceOf["Template"],
+);
+
+sub _build_engine {
+    my $self = shift;
+    return Lab::Labels::XeTeX->new
+        if $self->type eq "DTCR-1000";
+    return Lab::Labels::LaTeX->new;
+}
+
+
 sub as_pdf {
     my $self    = shift;
     my $context = {
@@ -54,11 +68,9 @@ sub as_pdf {
         gridlines => $self->gridlines,
     };
 
-    state $latex = Lab::Labels::LaTeX->new;
-
     my $pdf;
-    $latex->process($self->template->stringify, $context, \$pdf)
-        or die sprintf "Error processing %s: %s", $self->template, $latex->error;
+    $self->engine->process($self->template->stringify, $context, \$pdf)
+        or die sprintf "Error processing %s: %s", $self->template, $self->engine->error;
     return $pdf;
 }
 

@@ -1,0 +1,23 @@
+\pdfpageheight=0.5in
+\pdfpagewidth=1.05in
+\hoffset=-1in
+\voffset=-1.05in
+\parindent=0in
+\parskip=0pt
+\hsize=1.05in
+\vsize=0.5in
+\raggedbottom
+\font\labelfont="[DroidSans]" at 6pt
+\def\makefootline{\relax}
+\baselineskip=6pt
+\labelfont
+
+[% BLOCK label_contents ~%]
+  [%~ label.text | escape_text | replace('[\r\n]', ' \\par ') ~%]
+[%~ END %]
+
+[%- FOR label IN labels %]
+    [% PROCESS label_contents %]\eject
+[%- END -%]
+
+\bye
