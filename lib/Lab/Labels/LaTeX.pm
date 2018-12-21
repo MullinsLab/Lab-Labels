@@ -7,7 +7,7 @@ use Path::Tiny;
 use namespace::autoclean;
 
 my $DEFAULTS = {
-    INCLUDE_PATH        => [ path(__FILE__)->parent(4)->child("latex") ],
+    INCLUDE_PATH        => [ path(__FILE__)->parent(4)->child("templates/latex") ],
     LATEX_FORMAT        => 'pdf',
     TEMPLATE_EXTENSION  => '.tex',
     WRAPPER             => 'wrapper.tt',
