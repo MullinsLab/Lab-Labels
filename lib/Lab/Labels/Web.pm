@@ -19,7 +19,7 @@ sub dispatch_request {
             my @labels =
                 map { $as_barcodes ? { %$_, barcode => $_->{text} } : $_ }
                 map { +{ text => $_, copies => $copies } }
-                map { s/ \\ /\n/gr }
+                map { s/( \\ |\t)/\n/gr }
                     @lines;
 
             my $labels = Lab::Labels->new(
