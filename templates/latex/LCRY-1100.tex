@@ -1,0 +1,30 @@
+% Diversified Biotech LCRY-1100
+% Spec'd dimensions, double checked by measuring actual label sheet.
+
+\documentclass[letterpaper]{article}
+
+[% INCLUDE style.tt %]
+
+\barcodeX=0.3mm
+\barcodeHeight=1cm
+
+\usepackage[newdimens]{labels}
+\LabelCols=4                % Number of columns of labels per page
+\LabelRows=13               % Number of rows of labels per page
+
+\LeftPageMargin=0.70in      % These four parameters give the
+\RightPageMargin=0.71in     % page gutter sizes. The outer edges of
+\TopPageMargin=0.63in       % the outer labels are the specified
+\BottomPageMargin=0.62in    % distances from the edge of the paper.
+
+\InterLabelColumn=0.11in    % Gap between columns of labels
+\InterLabelRow=0in          % Gap between rows of labels
+
+\LeftLabelBorder=0mm        % These four parameters give the extra
+\RightLabelBorder=0mm       % space used around the text on each
+\TopLabelBorder=0mm         % actual label.
+\BottomLabelBorder=0mm      %
+
+\LabelInfotrue
+
+[% INCLUDE labels.tt %]
