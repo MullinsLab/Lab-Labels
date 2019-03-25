@@ -56,7 +56,7 @@ has engine => (
 sub _build_engine {
     my $self = shift;
     return Lab::Labels::XeTeX->new
-        if $self->type eq "DTCR-1000";
+        if $self->type =~ /^DTCR-[14]000$/;
     return Lab::Labels::LaTeX->new;
 }
 

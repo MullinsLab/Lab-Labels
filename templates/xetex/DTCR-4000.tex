@@ -1,0 +1,37 @@
+\pdfpageheight=82.5bp
+\pdfpagewidth=1in
+\hoffset=-0.94in
+\voffset=-0.85in
+\parindent=0in
+\parskip=0pt
+\hsize=1in
+\vsize=80bp
+\raggedbottom
+\raggedright
+\font\labelfont="[DroidSans]" at 6pt
+\def\makefootline{\relax}
+\baselineskip=6pt
+\labelfont
+
+[% BLOCK label_contents ~%]
+  [%~ label.text | escape_text | replace('[\r\n]', ' \\break ') ~%]
+[%~ END %]
+
+\def\shipPage{%
+\hbox{\box0 \hskip 0.125in\box1 } \vskip 0.3in\hbox{\box2 \hskip 0.125in\box3} \eject}
+
+[% counter = 0 %]
+[%- FOR label IN labels %]
+    [%- copy = 0; WHILE copy < label.copies %]
+        \setbox[%counter%]=\vbox to 0.375in{\hbox to 0.375in{%
+            \vbox{[% PROCESS label_contents %]}}}
+        [%- counter = counter + 1 -%]
+        [%- copy = copy + 1 -%]
+        [%- IF counter % 4 == 0-%]
+            \shipPage
+            [%- counter = 0 -%]
+        [%- END -%]
+    [%- END -%]
+[%- END -%]
+[% IF counter > 0 %]\shipPage[% END %]
+\bye
