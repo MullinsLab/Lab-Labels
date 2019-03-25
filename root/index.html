@@ -65,10 +65,11 @@
     </div>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
+            var re = /^DTCR-[14]000$/;
             var checkboxes = document.querySelectorAll("input[type=checkbox]");
             document.querySelector('#sku').addEventListener('change', (e) => {
                 [].forEach.call(checkboxes, (input) => {
-                    if (e.target.value == "DTCR-1000") {
+                    if (re.test(e.target.value)) {
                         input.checked = false;
                         input.disabled = true;
                     } else {
