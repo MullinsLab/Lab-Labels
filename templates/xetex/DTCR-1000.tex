@@ -17,7 +17,10 @@
 [%~ END %]
 
 [%- FOR label IN labels %]
+[%- copy = 0; WHILE copy < label.copies %]
     [% PROCESS label_contents %]\eject
+    [%- copy = copy + 1 -%]
+[%- END -%]
 [%- END -%]
 
 \bye
